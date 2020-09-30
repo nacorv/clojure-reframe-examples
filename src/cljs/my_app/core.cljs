@@ -15,7 +15,7 @@
   (:import goog.History))
 
 (defn nav-link [uri title page]
-  [:a.navbar-item
+  [:a.fl.w-10.pa2.mw-100
    {:href   uri
     :class (when (= page @(rf/subscribe [:common/page])) :is-active)}
    title])
@@ -23,25 +23,28 @@
 (defn navbar [] 
   (r/with-let [expanded? (r/atom false)]
               [:nav.navbar.is-info>div.container
-               [:div.navbar-brand
-                [:a.navbar-item {:href "/" :style {:font-weight :bold}} "my-app"]
-                [:span.navbar-burger.burger
+               [:div.mw5.mw7-ns.center.bg-light-gray.pa3.ph5-ns
+                [:p.tc
+                 [:a {:href "/" :style {:font-weight :bold}} "my-app"]]
+                [:span
                  {:data-target :nav-menu
                   :on-click #(swap! expanded? not)
                   :class (when @expanded? :is-active)}
-                 [:span][:span][:span]]]
-               [:div#nav-menu.navbar-menu
+                 ]]
+               [:div#nav-menu
                 {:class (when @expanded? :is-active)}
                 [:div.navbar-start
+                 [nav-link "#/" "Home" :home]
+                 [nav-link "#/" "Home" :home]
                  [nav-link "#/" "Home" :home]
                  [nav-link "#/about" "About" :about]]]]))
 
 (defn about-page []
-  [:section.section>div.container>div.content
+  [:section.section>div.container>div.content.fl.w-100.pa2
    [:img {:src "/img/warning_clojure.png"}]])
 
 (defn home-page []
-  [:section.section>div.container>div.content
+  [:section.section>div.container>div.content.fl.w-100.pa2
    (when-let [docs @(rf/subscribe [:docs])]
      [:div {:dangerouslySetInnerHTML {:__html (md->html docs)}}])])
 
