@@ -15,7 +15,7 @@
   (:import goog.History))
 
 (defn nav-link [uri title page]
-  [:a.fl.w-10.pa2.mw-100
+  [:a.link.pv2.dib.white.bg-black.outline.w-25.pa3.mr2
    {:href   uri
     :class (when (= page @(rf/subscribe [:common/page])) :is-active)}
    title])
@@ -33,9 +33,9 @@
                  ]]
                [:div#nav-menu
                 {:class (when @expanded? :is-active)}
-                [:div.navbar-start
+                [:div.flex.mt5
                  [nav-link "#/" "Home" :home]
-                 [nav-link "#/" "Home" :home]
+                 [nav-link "#/about" "About" :about]
                  [nav-link "#/" "Home" :home]
                  [nav-link "#/about" "About" :about]]]]))
 
