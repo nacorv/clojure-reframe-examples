@@ -25,7 +25,7 @@
               [:nav.navbar.is-info>div.container
                [:div.mw5.mw7-ns.center.bg-light-gray.pa3.ph5-ns
                 [:p.tc
-                 [:a {:href "/" :style {:font-weight :bold}} "my-app"]]
+                 [:a {:href "/" :style {:font-weight :bold}} "Clojure Re-frame Examples"]]
                 [:span
                  {:data-target :nav-menu
                   :on-click #(swap! expanded? not)
@@ -45,8 +45,8 @@
 
 (defn home-page []
   [:section.section>div.container>div.content.fl.w-100.pa2
-   (when-let [docs @(rf/subscribe [:docs])]
-     [:div {:dangerouslySetInnerHTML {:__html (md->html docs)}}])])
+   (when-let [home-page @(rf/subscribe [:content])]
+     [:div {:dangerouslySetInnerHTML {:__html (md->html home-page)}}])])
 
 (defn page []
   (if-let [page @(rf/subscribe [:common/page])]

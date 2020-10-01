@@ -26,17 +26,17 @@
     {:common/navigate-fx! [url-key params query]}))
 
 (rf/reg-event-db
-  :set-docs
-  (fn [db [_ docs]]
-    (assoc db :docs docs)))
+  :set-content
+  (fn [db [_ content]]
+    (assoc db :content content)))
 
 (rf/reg-event-fx
-  :fetch-docs
+  :fetch-content
   (fn [_ _]
     {:http-xhrio {:method          :get
-                  :uri             "/docs"
+                  :uri             "/homepage"
                   :response-format (ajax/raw-response-format)
-                  :on-success       [:set-docs]}}))
+                  :on-success       [:set-content]}}))
 
 (rf/reg-event-db
   :common/set-error
@@ -46,7 +46,7 @@
 (rf/reg-event-fx
   :page/init-home
   (fn [_ _]
-    {:dispatch [:fetch-docs]}))
+    {:dispatch [:fetch-content]}))
 
 ;;subscriptions
 
@@ -68,9 +68,9 @@
     (-> route :data :view)))
 
 (rf/reg-sub
-  :docs
+  :content
   (fn [db _]
-    (:docs db)))
+    (:content db)))
 
 (rf/reg-sub
   :common/error
