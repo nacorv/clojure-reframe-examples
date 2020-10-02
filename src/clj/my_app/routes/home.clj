@@ -15,6 +15,12 @@
    {:middleware [middleware/wrap-csrf
                  middleware/wrap-formats]}
    ["/" {:get home-page}]
+   
+   
+   ["/aboutpage" {:get (fn [_]
+                         (-> (response/ok (-> "content/about-page.md" io/resource slurp))
+                             (response/header "Content-Type" "text/plain; charset=utf-8")))}]
+   
    ["/homepage" {:get (fn [_]
                          (-> (response/ok (-> "content/home-page.md" io/resource slurp))
                              (response/header "Content-Type" "text/plain; charset=utf-8")))}]

@@ -38,6 +38,14 @@
                   :response-format (ajax/raw-response-format)
                   :on-success       [:set-content]}}))
 
+(rf/reg-event-fx
+  :fetch-about
+  (fn [_ _]
+    {:http-xhrio {:method          :get
+                  :uri             "/aboutpage"
+                  :response-format (ajax/raw-response-format)
+                  :on-success       [:set-content]}}))
+
 (rf/reg-event-db
   :common/set-error
   (fn [db [_ error]]
