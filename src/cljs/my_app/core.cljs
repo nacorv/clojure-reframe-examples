@@ -41,7 +41,8 @@
 
 (defn about-page []
   [:section.section>div.container>div.content.fl.w-100.pa2
-   [:img {:src "/img/warning_clojure.png"}]])
+   (when-let [about-page @(rf/subscribe [:aboutContent])]
+     [:div {:dangerouslySetInnerHTML {:__html (md->html about-page)}}])])
 
 (defn home-page []
   [:section.section>div.container>div.content.fl.w-100.pa2
